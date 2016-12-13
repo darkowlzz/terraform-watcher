@@ -5,7 +5,7 @@ Watcher for terraform.
 
 ## Installation
 
-`go get github.com/darkowlzz/terraform-watcher`
+`go get -u github.com/darkowlzz/terraform-watcher`
 
 
 ## Usage
