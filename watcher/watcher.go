@@ -6,9 +6,17 @@ import (
   "os/exec"
 
   "github.com/fsnotify/fsnotify"
+  "github.com/0xAX/notificator"
 )
 
+var notify *notificator.Notificator
+
 func TerraformWatcher() {
+  notify = notificator.New(notificator.Options{
+    DefaultIcon: "./logo.png",
+    AppName: "terraform-watcher",
+  })
+
   watcher, err := fsnotify.NewWatcher()
   if err != nil {
     log.Fatal(err)
@@ -30,6 +38,7 @@ func TerraformWatcher() {
           log.Println("Validation...")
           if err := cmd.Run(); err != nil {
             log.Printf("Validation failed!\n\n")
+            notify.Push("Validation failed!", "text", "./logo.png", notificator.UR_CRITICAL)
           } else {
             log.Printf("No issues found.\n\n")
           }

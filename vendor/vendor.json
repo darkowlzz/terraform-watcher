@@ -3,6 +3,12 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "yP71O+cOSXP7skbJC80qFqiudks=",
+			"path": "github.com/0xAX/notificator",
+			"revision": "a4b7af60b8aa4f59833dd730de2ff0f4a996f798",
+			"revisionTime": "2016-11-13T16:43:30Z"
+		},
+		{
 			"checksumSHA1": "hveFTNQ9YEyYRs6SWuXM+XU9qRI=",
 			"path": "github.com/fsnotify/fsnotify",
 			"revision": "fd9ec7deca8bf46ecd2a795baaacf2b3a9be1197",
