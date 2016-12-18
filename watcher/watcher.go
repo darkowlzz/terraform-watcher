@@ -9,14 +9,13 @@ import (
   "github.com/0xAX/notificator"
 )
 
-var notify *notificator.Notificator
+var notify = notificator.New(notificator.Options{
+  // No icon
+  DefaultIcon: "",
+  AppName: "terraform-watcher",
+})
 
 func TerraformWatcher() {
-  notify = notificator.New(notificator.Options{
-    DefaultIcon: "./logo.png",
-    AppName: "terraform-watcher",
-  })
-
   watcher, err := fsnotify.NewWatcher()
   if err != nil {
     log.Fatal(err)
@@ -38,7 +37,8 @@ func TerraformWatcher() {
           log.Println("Validation...")
           if err := cmd.Run(); err != nil {
             log.Printf("Validation failed!\n\n")
-            notify.Push("Validation failed!", "text", "./logo.png", notificator.UR_CRITICAL)
+            // Empty string in iconPath for no icon
+            notify.Push("Validation Failed!", "Modified file: " + event.Name, "", notificator.UR_NORMAL)
           } else {
             log.Printf("No issues found.\n\n")
           }
