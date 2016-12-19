@@ -27,3 +27,10 @@ and install all the vendor dependencies with `govendor sync`.
 Add new dependencies with `govendor fetch <packagename>`. This would install
 the dependencies under `vendor/` and add them to `vendor/vendor.json`, which
 should be checked-in.
+
+
+## Build
+
+Build and generate binaries using [gox](https://github.com/mitchellh/gox).
+
+`gox -osarch="linux/amd64 darwin/amd64"`
