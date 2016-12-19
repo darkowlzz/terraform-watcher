@@ -34,7 +34,8 @@ files on every file modification to catch issues ASAP.`,
 // Uncomment the following line if your bare application
 // has an action associated with it:
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("Watching...")
+		dir, _ := os.Getwd()
+		fmt.Println("Watching " + dir)
 		watcher.TerraformWatcher()
 	},
 }
