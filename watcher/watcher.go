@@ -7,6 +7,7 @@ import (
 
   "github.com/fsnotify/fsnotify"
   "github.com/0xAX/notificator"
+  "github.com/fatih/color"
 )
 
 var notify = notificator.New(notificator.Options{
@@ -29,18 +30,18 @@ func TerraformWatcher() {
       select {
       case event := <-watcher.Events:
         if event.Op&fsnotify.Write == fsnotify.Write {
-          log.Println("###############################")
-          log.Println("modified file:", event.Name)
+          log.Println(color.YellowString("Modified file: " + event.Name))
           cmd := exec.Command("terraform", "validate")
           cmd.Stdout = os.Stdout
           cmd.Stderr = os.Stderr
-          log.Println("Validation...")
+          log.Println(color.YellowString("Validation..."))
           if err := cmd.Run(); err != nil {
-            log.Printf("Validation failed!\n\n")
+            log.Printf(color.RedString("Validation failed! ⚠️\n\n"))
             // Empty string in iconPath for no icon
-            notify.Push("Validation Failed!", "Modified file: " + event.Name, "", notificator.UR_NORMAL)
+            notify.Push("Validation Failed!", "Modified file: " + event.Name,
+                        "", notificator.UR_NORMAL)
           } else {
-            log.Printf("No issues found.\n\n")
+            log.Printf(color.GreenString("No issues found 👍\n\n"))
           }
         }
       case err := <-watcher.Errors:
