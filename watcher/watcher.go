@@ -34,7 +34,7 @@ func TerraformWatcher() {
           cmd := exec.Command("terraform", "validate")
           cmd.Stdout = os.Stdout
           cmd.Stderr = os.Stderr
-          log.Println(color.YellowString("Validation..."))
+          log.Println(color.YellowString("Validating..."))
           if err := cmd.Run(); err != nil {
             log.Printf(color.RedString("Validation failed! ⚠️\n\n"))
             // Empty string in iconPath for no icon
